@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cu11s8ivagis7"]
+
+[ext_resource type="Shader" uid="uid://4ykp1fb8brt1" path="res://assets/shaders/background.gdshader" id="1_4ignj"]
+[ext_resource type="Script" uid="uid://dq5ni5yorabt" path="res://scenes/title.gd" id="1_wosw1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wosw1"]
+shader = ExtResource("1_4ignj")
+shader_parameter/aurora_color = Color(0.84, 0.84, 0.9, 1)
+shader_parameter/background_color1 = Color(0.05, 0.1, 0.2, 1)
+shader_parameter/background_color2 = Color(0.1, 0.05, 0.2, 1)
+shader_parameter/aurora_intensity = 1.8
+shader_parameter/star_brightness = 0.8
+
+[node name="Control" type="Control" unique_id=1233115241]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wosw1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1680977198]
+material = SubResource("ShaderMaterial_wosw1")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1117928625]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1262722456]
+layout_mode = 2
+
+[node name="start" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1077050437]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Play"
+
+[node name="quit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=519635623]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://db2h3t17k37pe"]
+
+[ext_resource type="Shader" uid="uid://dtlbgjt8qtao8" path="res://assets/shaders/Sky.gdshader" id="1_32lhk"]
+[ext_resource type="PackedScene" uid="uid://dyaixnmdmwlx2" path="res://scenes/player.tscn" id="1_kqs1s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7g83o"]
+shader = ExtResource("1_32lhk")
+shader_parameter/time_scale = 0.5
+shader_parameter/base_color = Color(0.05, 0.05, 0.08, 1)
+shader_parameter/slime_color = Color(0.15, 0.15, 0.2, 1)
+shader_parameter/highlight_color = Color(0.3, 0.35, 0.4, 1)
+shader_parameter/tendril_density = 4.0
+shader_parameter/tendril_thickness = 0.3
+shader_parameter/animation_speed = 1.0
+shader_parameter/slime_wetness = 0.7
+
+[sub_resource type="Sky" id="Sky_d1c63"]
+sky_material = SubResource("ShaderMaterial_7g83o")
+
+[sub_resource type="Environment" id="Environment_g2h84"]
+background_mode = 2
+sky = SubResource("Sky_d1c63")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D" unique_id=56836637]
+
+[node name="Map" type="Node3D" parent="." unique_id=215243853]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map" unique_id=262531570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29.5653)
+use_collision = true
+size = Vector3(52.4636, 5.83948, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map" unique_id=296187752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.3824)
+use_collision = true
+size = Vector3(52.4636, 5.83948, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map" unique_id=1397804981]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 0, 0.382374)
+use_collision = true
+size = Vector3(60, 5.83948, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map" unique_id=1724531399]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, 0.382374)
+use_collision = true
+size = Vector3(60, 5.83948, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map" unique_id=537140269]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, -2, 0.382374)
+use_collision = true
+size = Vector3(4, 5.83948, 4)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map" unique_id=710710688]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, -5.61763)
+use_collision = true
+size = Vector3(4, 5.83948, 4)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map" unique_id=1168523724]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, -12.6176)
+use_collision = true
+size = Vector3(4, 8, 4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map" unique_id=1401821890]
+use_collision = true
+size = Vector3(52.2363, 0.002, 59.575)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map" unique_id=1600118212]
+environment = SubResource("Environment_g2h84")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map" unique_id=1026976672]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=1307766356 instance=ExtResource("1_kqs1s")]
