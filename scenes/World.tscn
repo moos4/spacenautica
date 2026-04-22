@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://dtlbgjt8qtao8" path="res://assets/shaders/Sky.gdshader" id="1_32lhk"]
 [ext_resource type="PackedScene" uid="uid://dyaixnmdmwlx2" path="res://scenes/player.tscn" id="1_kqs1s"]
+[ext_resource type="PackedScene" uid="uid://cumrtrqu4bfsv" path="res://scenes/item.tscn" id="3_7g83o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7g83o"]
 shader = ExtResource("1_32lhk")
@@ -20,6 +21,8 @@ sky_material = SubResource("ShaderMaterial_7g83o")
 [sub_resource type="Environment" id="Environment_g2h84"]
 background_mode = 2
 sky = SubResource("Sky_d1c63")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 7.5
 tonemap_mode = 2
 glow_enabled = true
 
@@ -72,5 +75,9 @@ environment = SubResource("Environment_g2h84")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map" unique_id=1026976672]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
+shadow_opacity = 0.95
 
 [node name="Player" parent="." unique_id=1307766356 instance=ExtResource("1_kqs1s")]
+
+[node name="Item" parent="." unique_id=1154557784 instance=ExtResource("3_7g83o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0188112, 0.5009997, -4.313361)

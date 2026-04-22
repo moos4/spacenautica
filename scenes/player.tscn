@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dyaixnmdmwlx2"]
 
-[ext_resource type="Script" uid="uid://cgtej73y43b0u" path="res://Scripts/Player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://cgtej73y43b0u" path="res://scripts/Player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://e50vy6vdowmj" path="res://assets/textures/crosshair_x.png" id="2_g2els"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
 
@@ -21,3 +22,17 @@ shape = SubResource("CapsuleShape3D_wydro")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67939, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=169079314]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1613520268]
+target_position = Vector3(0, 0, -2.5)
+
+[node name="CenterContainer" type="CenterContainer" parent="Head/Camera3D" unique_id=260599658]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/CenterContainer" unique_id=6389006]
+layout_mode = 2
+texture = ExtResource("2_g2els")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cumrtrqu4bfsv"]
+
+[ext_resource type="Script" uid="uid://drf0gehbpb0of" path="res://scripts/item.gd" id="1_4gq7n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s8enn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4gq7n"]
+
+[node name="Item" type="RigidBody3D" unique_id=1154557784]
+script = ExtResource("1_4gq7n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=116877674]
+shape = SubResource("SphereShape3D_s8enn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=967974063]
+mesh = SubResource("SphereMesh_4gq7n")

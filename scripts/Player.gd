@@ -19,6 +19,7 @@ var gravity = 1.625 #9.8
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var interact_ray = $Head/Camera3D/RayCast3D
 
 
 func _ready():
@@ -30,15 +31,18 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	if Input.is_action_just_pressed("interact"): # Make sure to add "interact" in Input Map (e.g., 'E')
+		if check_interaction() == true:
+			var collider = interact_ray.get_collider()
+			collider.collect()
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()
 
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		
-	if Input.is_action_pressed("quit"):
-		get_tree().quit()
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -72,6 +76,7 @@ func _physics_process(delta):
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
+	check_interaction()
 	move_and_slide()
 
 
@@ -80,3 +85,12 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
+
+func check_interaction():
+	var collider = interact_ray.get_collider()
+	if collider is Interactable and interact_ray.is_colliding():
+		$Head/Camera3D/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_o.png")
+		return true
+	else:
+		$Head/Camera3D/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_x.png")
+		return false
