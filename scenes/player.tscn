@@ -26,13 +26,60 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67939, 0)
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1613520268]
 target_position = Vector3(0, 0, -2.5)
 
-[node name="CenterContainer" type="CenterContainer" parent="Head/Camera3D" unique_id=260599658]
+[node name="menu" type="CanvasLayer" parent="Head/Camera3D" unique_id=1800990717]
+visible = false
+
+[node name="Panel" type="Panel" parent="Head/Camera3D/menu" unique_id=1403848714]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/CenterContainer" unique_id=6389006]
+[node name="CenterContainer" type="CenterContainer" parent="Head/Camera3D/menu/Panel" unique_id=282342382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Head/Camera3D/menu/Panel/CenterContainer" unique_id=1103674198]
+layout_mode = 2
+
+[node name="Settings" type="Button" parent="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer" unique_id=353053927]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer" unique_id=982180491]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="Back" type="Button" parent="Head/Camera3D/menu/Panel" unique_id=1382197869]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 31.0
+text = "Back"
+
+[node name="over" type="CanvasLayer" parent="Head/Camera3D" unique_id=1724121002]
+
+[node name="CenterContainer" type="CenterContainer" parent="Head/Camera3D/over" unique_id=260599658]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D/over/CenterContainer" unique_id=6389006]
 layout_mode = 2
 texture = ExtResource("2_g2els")
+
+[node name="ProgressBar" type="ProgressBar" parent="Head/Camera3D/over" unique_id=152221450]
+offset_right = 194.0
+offset_bottom = 27.0
+
+[connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Head/Camera3D/menu/Panel/Back" to="." method="_on_back_pressed"]

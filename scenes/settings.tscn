@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c60qf8msrfq2" path="res://scripts/settings.gd" id="1_5p8wc"]
 
-[node name="Settigns" type="Control" unique_id=1479193919]
+[node name="Settings" type="Control" unique_id=1479193919]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,10 +19,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Panel" unique_id=453799186]
+[node name="MenuBar" type="MenuBar" parent="Panel" unique_id=148200881]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 41.0
-text = "back"
+offset_right = 401.0
+offset_bottom = 31.0
+
+[node name="Video" type="PopupMenu" parent="Panel/MenuBar" unique_id=1661979654]
+oversampling_override = 1.0
+
+[node name="Audio" type="PopupMenu" parent="Panel/MenuBar" unique_id=19239548]
+oversampling_override = 1.0
+
+[node name="Controls" type="PopupMenu" parent="Panel/MenuBar" unique_id=1544687928]
+oversampling_override = 1.0
