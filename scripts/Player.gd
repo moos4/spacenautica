@@ -144,3 +144,4 @@ func _on_settings_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+#comment because git is acting gay
