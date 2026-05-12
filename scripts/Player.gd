@@ -3,11 +3,16 @@ extends CharacterBody3D
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var interact_ray = $Head/Camera3D/RayCast3D
-@onready var progress_bar = $Head/Camera3D/over/ProgressBar
+@onready var progress_oxygen_bar = $Head/Camera3D/over/ProgressBar
+@onready var progress_health_bar = $Head/Camera3D/over/ProgressBar2
 
 # life variables
+ #oxygen
 var max_oxygen = 3600.0
-var current_oxygen = max_oxygen
+var current_oxygen = 3600.0
+ #player health
+var player_max_health = 100.0
+var player_current_health = 100.0
 
 # movement variables
 var speed
@@ -27,13 +32,31 @@ var t_bob = 0.0
 #fov variables
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
+# gravity variables
+var inside : bool = false
+const outside_gravity : float = 1.625 #9.8
+var inside_gravity : float = 9.81
 
-var gravity = 1.625 #9.8
+# different functions
+func oxygen_handling(delta):
+	progress_oxygen_bar.value = current_oxygen
+	if current_oxygen > 0.0:
+		current_oxygen -= delta
+	else:
+		get_tree().quit()
+		print("you ran out of oxygen")
 
+func player_take_damage(damage):
+	if player_current_health <= damage:
+		get_tree().quit()
+		print("you died")
+	player_current_health -= damage
 
+# physics functions
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	progress_bar.max_value = max_oxygen
+	progress_oxygen_bar.max_value = max_oxygen
+	progress_health_bar.max_value = player_max_health
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -46,13 +69,17 @@ func _unhandled_input(event):
 			collider.collect()
 
 func _physics_process(delta):
+	progress_health_bar.value = player_current_health
 	# goes to oxygen
-	_oxygen_handling(delta)
+	oxygen_handling(delta)
 	# interaction visual
 	check_interaction()
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y -= gravity * delta
+		if inside:
+			velocity.y -= inside_gravity * delta
+		else:
+			velocity.y -= outside_gravity * delta
 		
 	if Input.is_action_just_pressed("quit"):
 		if $Head/Camera3D/menu.visible == true:
@@ -80,23 +107,31 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if is_on_floor():
-		if direction:
+	if inside:
+		if direction: 
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 		else:
 			velocity.x = lerp(velocity.x, (direction.x / 2) * speed, delta * 7.0)
 			velocity.z = lerp(velocity.z, (direction.z / 2) * speed, delta * 7.0)
-	# air control systemv (potential bug)
-	elif Input.is_action_pressed("use_oxygen_boost"):
-		current_oxygen -= 100 * delta
-		velocity.x += direction.x * BOOST_VELOCITY
-		velocity.z += direction.z * BOOST_VELOCITY
-		velocity.x = clamp(velocity.x, -5, 5)
-		velocity.z = clamp(velocity.z, -5, 5)
-		if Input.is_action_pressed("jump"):
-			velocity.y += BOOST_Y_VELOCITY * delta
-
+	else: 
+		if is_on_floor():
+			if direction:
+				velocity.x = direction.x * speed
+				velocity.z = direction.z * speed
+			else:
+				velocity.x = lerp(velocity.x, (direction.x / 2) * speed, delta * 7.0)
+				velocity.z = lerp(velocity.z, (direction.z / 2) * speed, delta * 7.0)
+		# air control system (potential bug)
+		elif Input.is_action_pressed("use_oxygen_boost"):
+			current_oxygen -= 100 * delta
+			velocity.x += direction.x * BOOST_VELOCITY * delta * 2.0
+			velocity.z += direction.z * BOOST_VELOCITY * delta * 2.0
+			velocity.x = clamp(velocity.x, -5, 5)
+			velocity.z = clamp(velocity.z, -5, 5)
+			if Input.is_action_pressed("jump"):
+				velocity.y += BOOST_Y_VELOCITY * delta * 2.0
+		
 	
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -108,13 +143,6 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	move_and_slide()
-
-func _oxygen_handling(delta):
-	progress_bar.value = current_oxygen
-	if current_oxygen > 0:
-		current_oxygen -= delta
-	if current_oxygen <= 0:
-		get_tree().quit()
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
