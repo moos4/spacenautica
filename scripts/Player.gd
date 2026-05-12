@@ -17,7 +17,6 @@ var player_current_health = 100.0
 # movement variables
 var speed
 const WALK_SPEED = 4.0
-const SPRINT_Y_VELOCITY = 2.0
 const SPRINT_SPEED = 6.0
 const JUMP_VELOCITY = 2.5
 const SENSITIVITY = 0.004
@@ -96,8 +95,6 @@ func _physics_process(delta):
 		
 	if Input.is_action_pressed("sprint"):
 		speed = SPRINT_SPEED
-		if is_on_floor() and (velocity.x != 0 or velocity.z != 0):
-			velocity.y = SPRINT_Y_VELOCITY
 	else:
 		speed = WALK_SPEED	
 	# handles air boost
@@ -131,6 +128,9 @@ func _physics_process(delta):
 			velocity.z = clamp(velocity.z, -5, 5)
 			if Input.is_action_pressed("jump"):
 				velocity.y += BOOST_Y_VELOCITY * delta * 2.0
+				velocity.y = clamp(velocity.y, -7.5, 7.5)
+		velocity.x += direction.x * BOOST_VELOCITY * delta * 1
+		velocity.z += direction.z * BOOST_VELOCITY * delta * 1.0
 		
 	
 	# Head bob

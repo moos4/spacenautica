@@ -80,9 +80,10 @@ texture = ExtResource("2_g2els")
 offset_right = 194.0
 offset_bottom = 27.0
 
-[node name="ProgressBar2" type="ProgressBar" parent="Head/Camera3D/over" unique_id=1501567596]
-offset_right = 4.0
-offset_bottom = 27.0
+[node name="ProgressBar2" type="ProgressBar" parent="Head/Camera3D/over" unique_id=1338904974]
+offset_top = 29.0
+offset_right = 194.0
+offset_bottom = 56.0
 
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
