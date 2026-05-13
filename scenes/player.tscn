@@ -71,19 +71,80 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Head/Camera3D/over/CenterContainer" unique_id=6389006]
 layout_mode = 2
 texture = ExtResource("2_g2els")
 
-[node name="ProgressBar" type="ProgressBar" parent="Head/Camera3D/over" unique_id=152221450]
-offset_right = 194.0
-offset_bottom = 27.0
+[node name="Control" type="Control" parent="Head/Camera3D/over" unique_id=185521220]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
 
-[node name="ProgressBar2" type="ProgressBar" parent="Head/Camera3D/over" unique_id=1338904974]
-offset_top = 29.0
-offset_right = 194.0
-offset_bottom = 56.0
+[node name="player oxygen tank 1" type="ProgressBar" parent="Head/Camera3D/over/Control" unique_id=1338904974]
+layout_mode = 0
+offset_left = 1101.0
+offset_top = 490.0
+offset_right = 1161.0
+offset_bottom = 510.0
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0.36893377, 0.6439497, 0.7748322, 1)
+theme_override_colors/font_outline_color = Color(0.36893377, 0.6439497, 0.7748322, 1)
+theme_override_font_sizes/font_size = 10
+
+[node name="player health bar" type="ProgressBar" parent="Head/Camera3D/over/Control" unique_id=152221450]
+layout_mode = 0
+offset_left = 1715.0
+offset_top = 504.0
+offset_right = 1915.0
+offset_bottom = 600.0
+
+[node name="ColorRect" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=401976536]
+layout_mode = 0
+offset_left = 1085.0
+offset_top = 392.5
+offset_right = 1145.0
+offset_bottom = 452.5
+
+[node name="ColorRect2" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=1909584885]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 1070.0
+offset_top = 460.0
+offset_right = 1160.0
+offset_bottom = 610.0
+
+[node name="ColorRect3" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=1920315068]
+layout_mode = 0
+offset_left = 1122.5
+offset_top = 617.5
+offset_right = 1152.5
+offset_bottom = 730.0
+
+[node name="ColorRect4" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=1366964082]
+layout_mode = 0
+offset_left = 1077.5
+offset_top = 617.5
+offset_right = 1107.5
+offset_bottom = 730.0
+
+[node name="ColorRect5" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=1959280193]
+layout_mode = 0
+offset_left = 1167.5
+offset_top = 467.5
+offset_right = 1197.5
+offset_bottom = 587.5
+
+[node name="ColorRect6" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=2102737611]
+layout_mode = 0
+offset_left = 1032.5
+offset_top = 467.5
+offset_right = 1062.5
+offset_bottom = 587.5
 
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

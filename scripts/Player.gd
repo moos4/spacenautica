@@ -3,8 +3,8 @@ extends CharacterBody3D
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var interact_ray = $Head/Camera3D/RayCast3D
-@onready var progress_oxygen_bar = $Head/Camera3D/over/ProgressBar
-@onready var progress_health_bar = $Head/Camera3D/over/ProgressBar2
+@onready var progress_oxygen_bar = $"Head/Camera3D/over/Control/player oxygen tank 1"
+@onready var progress_health_bar = $"Head/Camera3D/over/Control/player health bar"
 
 # life variables
  #oxygen
