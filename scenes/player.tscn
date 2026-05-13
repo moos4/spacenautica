@@ -86,22 +86,38 @@ offset_right = 576.0
 offset_bottom = 324.0
 
 [node name="player oxygen tank 1" type="ProgressBar" parent="Head/Camera3D/over/Control" unique_id=1338904974]
+modulate = Color(0.36893377, 0.6439497, 0.7748322, 1)
+self_modulate = Color(0.36893377, 0.6439497, 0.7748322, 1)
 layout_mode = 0
-offset_left = 1101.0
-offset_top = 490.0
-offset_right = 1161.0
-offset_bottom = 510.0
-rotation = 1.5707964
+offset_left = 1077.5
+offset_top = 470.0
+offset_right = 1097.5
+offset_bottom = 600.0
 theme_override_colors/font_color = Color(0.36893377, 0.6439497, 0.7748322, 1)
 theme_override_colors/font_outline_color = Color(0.36893377, 0.6439497, 0.7748322, 1)
 theme_override_font_sizes/font_size = 10
+fill_mode = 3
+
+[node name="player oxygen tank 2" type="ProgressBar" parent="Head/Camera3D/over/Control" unique_id=1402538484]
+modulate = Color(0.36893377, 0.6439497, 0.7748322, 1)
+self_modulate = Color(0.36893377, 0.6439497, 0.7748322, 1)
+layout_mode = 0
+offset_left = 1132.5
+offset_top = 470.0
+offset_right = 1152.5
+offset_bottom = 600.0
+theme_override_colors/font_color = Color(0.36893377, 0.6439497, 0.7748322, 1)
+theme_override_colors/font_outline_color = Color(0.36893377, 0.6439497, 0.7748322, 1)
+theme_override_font_sizes/font_size = 10
+fill_mode = 3
 
 [node name="player health bar" type="ProgressBar" parent="Head/Camera3D/over/Control" unique_id=152221450]
 layout_mode = 0
-offset_left = 1715.0
-offset_top = 504.0
-offset_right = 1915.0
-offset_bottom = 600.0
+offset_left = 1230.0
+offset_top = 519.0
+offset_right = 1250.0
+offset_bottom = 719.0
+fill_mode = 3
 
 [node name="ColorRect" type="ColorRect" parent="Head/Camera3D/over/Control" unique_id=401976536]
 layout_mode = 0

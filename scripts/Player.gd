@@ -3,13 +3,16 @@ extends CharacterBody3D
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var interact_ray = $Head/Camera3D/RayCast3D
-@onready var progress_oxygen_bar = $"Head/Camera3D/over/Control/player oxygen tank 1"
+@onready var progress_oxygen_tank_1 = $"Head/Camera3D/over/Control/player oxygen tank 1"
+@onready var progress_oxygen_tank_2 = $"Head/Camera3D/over/Control/player oxygen tank 2"
 @onready var progress_health_bar = $"Head/Camera3D/over/Control/player health bar"
 
 # life variables
  #oxygen
-var max_oxygen = 3600.0
-var current_oxygen = 3600.0
+var max_oxygen_tank_1 = 1800.0
+var max_oxygen_tank_2 = 1800.0
+var current_oxygen_tank_1 = 1800.0
+var current_oxygen_tank_2 = 1800.0
  #player health
 var player_max_health = 100.0
 var player_current_health = 100.0
@@ -37,13 +40,20 @@ const outside_gravity : float = 1.625 #9.8
 var inside_gravity : float = 9.81
 
 # different functions
-func oxygen_handling(delta):
-	progress_oxygen_bar.value = current_oxygen
-	if current_oxygen > 0.0:
-		current_oxygen -= delta
+func oxygen_handling(delta, using_oxygen = KEY_NONE):
+	progress_oxygen_tank_1.value = current_oxygen_tank_1
+	progress_oxygen_tank_2.value = current_oxygen_tank_2
+	if using_oxygen:
+		if current_oxygen_tank_1 > 0.0:
+			current_oxygen_tank_1 -= using_oxygen
+		elif current_oxygen_tank_2 > 0.0:
+			current_oxygen_tank_2 -= using_oxygen
+	if current_oxygen_tank_1 > 0.0:
+		current_oxygen_tank_1 -= delta
+	elif current_oxygen_tank_2 > 0.0:
+		current_oxygen_tank_2 -= delta
 	else:
-		get_tree().quit()
-		print("you ran out of oxygen")
+		player_take_damage(delta)
 
 func player_take_damage(damage):
 	if player_current_health <= damage:
@@ -54,7 +64,8 @@ func player_take_damage(damage):
 # physics functions
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	progress_oxygen_bar.max_value = max_oxygen
+	progress_oxygen_tank_1.max_value = max_oxygen_tank_1
+	progress_oxygen_tank_2.max_value = max_oxygen_tank_2
 	progress_health_bar.max_value = player_max_health
 
 func _unhandled_input(event):
@@ -121,7 +132,7 @@ func _physics_process(delta):
 				velocity.z = lerp(velocity.z, (direction.z / 2) * speed, delta * 7.0)
 		# air control system (potential bug)
 		elif Input.is_action_pressed("use_oxygen_boost"):
-			current_oxygen -= 100 * delta
+			oxygen_handling(delta, delta * 100)
 			velocity.x += direction.x * BOOST_VELOCITY * delta * 2.0
 			velocity.z += direction.z * BOOST_VELOCITY * delta * 2.0
 			velocity.x = clamp(velocity.x, -5, 5)
@@ -129,8 +140,8 @@ func _physics_process(delta):
 			if Input.is_action_pressed("jump"):
 				velocity.y += BOOST_Y_VELOCITY * delta * 2.0
 				velocity.y = clamp(velocity.y, -7.5, 7.5)
-		velocity.x += direction.x * BOOST_VELOCITY * delta * 1
-		velocity.z += direction.z * BOOST_VELOCITY * delta * 1.0
+		velocity.x += direction.x * BOOST_VELOCITY * delta * 0.75
+		velocity.z += direction.z * BOOST_VELOCITY * delta * 0.75
 		
 	
 	# Head bob
