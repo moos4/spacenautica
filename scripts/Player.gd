@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var progress_oxygen_tank_1 = $"Head/Camera3D/over/Control/player oxygen tank 1"
 @onready var progress_oxygen_tank_2 = $"Head/Camera3D/over/Control/player oxygen tank 2"
 @onready var progress_health_bar = $"Head/Camera3D/over/Control/player health bar"
+@onready var player_data_label = $Head/Camera3D/over/Container/Label
 
 # life variables
  #oxygen
@@ -26,6 +27,9 @@ const SENSITIVITY = 0.004
 const BOOST_VELOCITY = 3.5 # 1.5
 const BOOST_Y_VELOCITY = 2.5
 
+#debug menu variables
+var debug_menu_is_open : bool = false
+
 #bob variables
 const BOB_FREQ = 2.4
 const BOB_AMP = 0.08
@@ -34,6 +38,7 @@ var t_bob = 0.0
 #fov variables
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
+
 # gravity variables
 var inside : bool = false
 const outside_gravity : float = 1.625 #9.8
@@ -61,8 +66,23 @@ func player_take_damage(damage):
 		print("you died")
 	player_current_health -= damage
 
+#debug menu 
+func open_close_debug_menu():
+	if debug_menu_is_open == false:
+		debug_menu_is_open = true
+		player_data_label.show()
+	else:
+		debug_menu_is_open = false
+		player_data_label.hide()
+	
+func debug_menu():
+	player_data_label.text = " x: " + String.num(position.x, 1) + " y: " + String.num(position.y, 1) + " z: " + String.num(position.z, 1) + "
+ 	player health: " + String.num(player_current_health, 1) + "
+ 	player oxygen: " + String.num(current_oxygen_tank_1 + current_oxygen_tank_2, 1)
+
 # physics functions
 func _ready():
+	player_data_label.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	progress_oxygen_tank_1.max_value = max_oxygen_tank_1
 	progress_oxygen_tank_2.max_value = max_oxygen_tank_2
@@ -79,11 +99,19 @@ func _unhandled_input(event):
 			collider.collect()
 
 func _physics_process(delta):
+	#checks if player fell out of the world
+	if position.y <= -20:
+		player_take_damage(INF)
+	# updates bars
 	progress_health_bar.value = player_current_health
 	# goes to oxygen
 	oxygen_handling(delta)
 	# interaction visual
 	check_interaction()
+	# debug menu
+	debug_menu()
+	if Input.is_action_just_pressed("open_close debug menu"):
+		open_close_debug_menu()
 	# Add the gravity.
 	if not is_on_floor():
 		if inside:
@@ -108,10 +136,7 @@ func _physics_process(delta):
 		speed = SPRINT_SPEED
 	else:
 		speed = WALK_SPEED	
-	# handles air boost
 	
-	
-
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

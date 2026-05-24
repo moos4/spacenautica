@@ -162,6 +162,13 @@ offset_top = 467.5
 offset_right = 1062.5
 offset_bottom = 587.5
 
+[node name="Container" type="Container" parent="Head/Camera3D/over" unique_id=1736608416]
+offset_right = 575.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Head/Camera3D/over/Container" unique_id=896299039]
+layout_mode = 2
+
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Head/Camera3D/menu/Panel/Back" to="." method="_on_back_pressed"]
