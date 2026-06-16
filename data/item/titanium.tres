@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bl4vi0lim65ev"]
+
+[ext_resource type="Script" uid="uid://cdccowx3lefui" path="res://scripts/item_data.gd" id="1_hekbl"]
+
+[resource]
+script = ExtResource("1_hekbl")
+name = "Titanium"
+description = "idfk"
+metadata/_custom_type_script = "uid://cdccowx3lefui"

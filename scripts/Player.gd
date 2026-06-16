@@ -93,10 +93,13 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-	if Input.is_action_just_pressed("interact"): # Make sure to add "interact" in Input Map (e.g., 'E')
+		
+	if Input.is_action_just_pressed("interact"):
 		if check_interaction() == true:
 			var collider = interact_ray.get_collider()
-			collider.collect()
+			if collider and collider.has_node("Interactable"):
+				#var interactable_component = collider.get_node("Interactable") as Interactable
+				(collider.get_node("Interactable") as Interactable).interact()
 
 func _physics_process(delta):
 	#checks if player fell out of the world
@@ -185,15 +188,15 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
-	
+
 func check_interaction():
-	var collider = interact_ray.get_collider()
-	if collider is Interactable and interact_ray.is_colliding():
-		$Head/Camera3D/over/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_o.png")
-		return true
-	else:
-		$Head/Camera3D/over/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_x.png")
-		return false
+	if interact_ray.is_colliding():
+		var collider = interact_ray.get_collider()
+		if collider and collider.has_node("Interactable"):
+			$Head/Camera3D/over/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_o.png")
+			return true
+	$Head/Camera3D/over/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_x.png")
+	return false
 		
 # menu buttons
 

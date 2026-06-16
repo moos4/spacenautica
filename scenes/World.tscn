@@ -3,6 +3,9 @@
 [ext_resource type="Shader" uid="uid://dtlbgjt8qtao8" path="res://assets/shaders/Sky.gdshader" id="1_32lhk"]
 [ext_resource type="PackedScene" uid="uid://dyaixnmdmwlx2" path="res://scenes/player.tscn" id="1_kqs1s"]
 [ext_resource type="PackedScene" uid="uid://cumrtrqu4bfsv" path="res://scenes/item.tscn" id="3_7g83o"]
+[ext_resource type="Resource" uid="uid://bl4vi0lim65ev" path="res://data/item/titanium.tres" id="4_d1c63"]
+[ext_resource type="PackedScene" uid="uid://bibr1abvj5r0g" path="res://assets/models/test/bread_low_poly.glb" id="4_hlk0d"]
+[ext_resource type="Script" uid="uid://cdccowx3lefui" path="res://scripts/item_data.gd" id="5_0uv0p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7g83o"]
 shader = ExtResource("1_32lhk")
@@ -25,6 +28,13 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 7.5
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_b3faq"]
+script = ExtResource("5_0uv0p")
+name = "Bread"
+model_scene = ExtResource("4_hlk0d")
+description = "idk"
+metadata/_custom_type_script = "uid://cdccowx3lefui"
 
 [node name="World" type="Node3D" unique_id=56836637]
 
@@ -79,5 +89,10 @@ shadow_opacity = 0.95
 
 [node name="Player" parent="." unique_id=1307766356 instance=ExtResource("1_kqs1s")]
 
-[node name="Item" parent="." unique_id=1154557784 instance=ExtResource("3_7g83o")]
+[node name="Item2" parent="." unique_id=1154557784 instance=ExtResource("3_7g83o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0376225, 1.0019994, -8.626722)
+item_data = SubResource("Resource_b3faq")
+
+[node name="Item" parent="." unique_id=584086818 instance=ExtResource("3_7g83o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0188112, 0.5009997, -4.313361)
+item_data = ExtResource("4_d1c63")

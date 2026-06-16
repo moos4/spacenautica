@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cumrtrqu4bfsv"]
 
 [ext_resource type="Script" uid="uid://drf0gehbpb0of" path="res://scripts/item.gd" id="1_4gq7n"]
+[ext_resource type="PackedScene" uid="uid://b5lv8dl1vlxa8" path="res://scenes/interactable.tscn" id="2_s8enn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s8enn"]
 
@@ -14,3 +15,5 @@ shape = SubResource("SphereShape3D_s8enn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=967974063]
 mesh = SubResource("SphereMesh_4gq7n")
+
+[node name="Interactable" parent="." unique_id=905616000 instance=ExtResource("2_s8enn")]
