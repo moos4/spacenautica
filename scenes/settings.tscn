@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://bafwacpdu8l53"]
 
 [ext_resource type="Script" uid="uid://c60qf8msrfq2" path="res://scripts/settings.gd" id="1_5p8wc"]
+[ext_resource type="Texture2D" uid="uid://dj5o1qsmac0am" path="res://assets/textures/IMG_0608.PNG" id="2_f4mfi"]
+[ext_resource type="Texture2D" uid="uid://mqblqwl7f0cu" path="res://assets/textures/You_Too.png" id="3_es4n0"]
+[ext_resource type="Texture2D" uid="uid://6mtuonanudv6" path="res://assets/textures/IMG_0605.PNG" id="4_gis3k"]
+
+[sub_resource type="Theme" id="Theme_5p8wc"]
+Button/font_sizes/font_size = 32
+TabContainer/font_sizes/font_size = 32
 
 [node name="Settings" type="Control" unique_id=1479193919]
 layout_mode = 3
@@ -18,17 +25,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_5p8wc")
 
-[node name="MenuBar" type="MenuBar" parent="Panel" unique_id=148200881]
+[node name="Close" type="Button" parent="Panel" unique_id=1278935933]
 layout_mode = 0
-offset_right = 401.0
-offset_bottom = 31.0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
 
-[node name="Video" type="PopupMenu" parent="Panel/MenuBar" unique_id=1661979654]
-oversampling_override = 1.0
+[node name="TabContainer" type="TabContainer" parent="Panel" unique_id=190568786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
 
-[node name="Audio" type="PopupMenu" parent="Panel/MenuBar" unique_id=19239548]
-oversampling_override = 1.0
+[node name="Video" type="Control" parent="Panel/TabContainer" unique_id=900977591]
+layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="Controls" type="PopupMenu" parent="Panel/MenuBar" unique_id=1544687928]
-oversampling_override = 1.0
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Video" unique_id=1011958720]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+texture = ExtResource("2_f4mfi")
+expand_mode = 1
+
+[node name="Audio" type="Control" parent="Panel/TabContainer" unique_id=1531202129]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Audio" unique_id=16597340]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+texture = ExtResource("3_es4n0")
+expand_mode = 1
+
+[node name="Controls" type="Control" parent="Panel/TabContainer" unique_id=1214384799]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/TabContainer/Controls" unique_id=1782410109]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+texture = ExtResource("4_gis3k")
+expand_mode = 1
+
+[connection signal="pressed" from="Panel/Close" to="." method="_on_close_pressed"]

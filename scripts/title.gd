@@ -1,5 +1,7 @@
 extends Control
 
+const SETTINGS = preload("uid://bafwacpdu8l53")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,4 +22,4 @@ func _on_start_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	get_tree()
+	add_child(load("res://scenes/settings.tscn").instantiate())
