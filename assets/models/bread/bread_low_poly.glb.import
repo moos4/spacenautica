@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bibr1abvj5r0g"
-path="res://.godot/imported/bread_low_poly.glb-ea05e3d2d0f331673c20c4fa5f9e907d.scn"
+path="res://.godot/imported/bread_low_poly.glb-73885c5e413ef8c2eb8a18b6ad43dbec.scn"
 
 [deps]
 
-source_file="res://assets/models/test/bread_low_poly.glb"
-dest_files=["res://.godot/imported/bread_low_poly.glb-ea05e3d2d0f331673c20c4fa5f9e907d.scn"]
+source_file="res://assets/models/bread/bread_low_poly.glb"
+dest_files=["res://.godot/imported/bread_low_poly.glb-73885c5e413ef8c2eb8a18b6ad43dbec.scn"]
 
 [params]
 

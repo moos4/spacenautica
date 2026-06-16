@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dyaixnmdmwlx2" path="res://scenes/player.tscn" id="1_kqs1s"]
 [ext_resource type="PackedScene" uid="uid://cumrtrqu4bfsv" path="res://scenes/item.tscn" id="3_7g83o"]
 [ext_resource type="Resource" uid="uid://bl4vi0lim65ev" path="res://data/item/titanium.tres" id="4_d1c63"]
-[ext_resource type="PackedScene" uid="uid://bibr1abvj5r0g" path="res://assets/models/test/bread_low_poly.glb" id="4_hlk0d"]
+[ext_resource type="PackedScene" uid="uid://da8c6o0o3xyb5" path="res://assets/models/bread/bread_scene.tscn" id="4_hlk0d"]
 [ext_resource type="Script" uid="uid://cdccowx3lefui" path="res://scripts/item_data.gd" id="5_0uv0p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7g83o"]

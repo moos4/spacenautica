@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cibm4yyv3wswr"
-path.s3tc="res://.godot/imported/bread_low_poly_0.png-8fada271a35542feecdb3b1108d6a05a.s3tc.ctex"
+uid="uid://b43rwfjfk34jg"
+path.s3tc="res://.godot/imported/bread_low_poly_1.png-c7f2e77e60b622990af11b68108c0653.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "32c80ffd28a9ec9a662396acd9393d1a"
+"md5": "56f44ebb61896a0a3809ed237d8261a1"
 }
 
 [deps]
 
-source_file="res://assets/models/test/bread_low_poly_0.png"
-dest_files=["res://.godot/imported/bread_low_poly_0.png-8fada271a35542feecdb3b1108d6a05a.s3tc.ctex"]
+source_file="res://assets/models/bread/bread_low_poly_1.png"
+dest_files=["res://.godot/imported/bread_low_poly_1.png-c7f2e77e60b622990af11b68108c0653.s3tc.ctex"]
 
 [params]
 

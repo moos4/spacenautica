@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://da8c6o0o3xyb5"]
+
+[ext_resource type="PackedScene" uid="uid://bibr1abvj5r0g" path="res://assets/models/bread/bread_low_poly.glb" id="1_lrsih"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvpb1"]
+size = Vector3(0.626, 0.212, 0.376)
+
+[node name="Bread_Scene" unique_id=774286327 instance=ExtResource("1_lrsih")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1" unique_id=995726771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.106325105, 0)
+shape = SubResource("BoxShape3D_mvpb1")
