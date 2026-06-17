@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b3quhhqv6i8k2"]
+
+[ext_resource type="Script" uid="uid://blf4do4vpc8dw" path="res://scripts/Inventory/Inventory.gd" id="1_pilxw"]
+[ext_resource type="PackedScene" uid="uid://8yctwl6vpcnj" path="res://scenes/Inventory/inventory_ui_slot.tscn" id="2_knsip"]
+
+[node name="Inventory" type="CanvasLayer" unique_id=28303347]
+script = ExtResource("1_pilxw")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1946300830]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=785066203]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1316320854]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1358296718]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Inventory"
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=525436509]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="InventoryUISlot" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1855085620 instance=ExtResource("2_knsip")]
+layout_mode = 2
+
+[node name="InventoryUISlot2" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=311030810 instance=ExtResource("2_knsip")]
+layout_mode = 2
+
+[node name="InventoryUISlot3" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1251893421 instance=ExtResource("2_knsip")]
+layout_mode = 2
+
+[node name="InventoryUISlot4" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=853106865 instance=ExtResource("2_knsip")]
+layout_mode = 2
+
+[node name="InventoryUISlot5" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=89583577 instance=ExtResource("2_knsip")]
+layout_mode = 2
+
+[node name="InventoryUISlot6" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1732623182 instance=ExtResource("2_knsip")]
+layout_mode = 2

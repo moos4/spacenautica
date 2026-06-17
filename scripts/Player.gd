@@ -8,6 +8,8 @@ extends CharacterBody3D
 @onready var progress_health_bar = $"Head/Camera3D/over/Control/player health bar"
 @onready var player_data_label = $Head/Camera3D/over/Container/Label
 
+@onready var inventory_ui: PlayerInventory = $Head/Camera3D/Inventory
+
 # life variables
  #oxygen
 var max_oxygen_tank_1 = 1800.0
@@ -94,12 +96,39 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
+	#if Input.is_action_just_pressed("interact"):
+		#if check_interaction() == true:
+			#var collider = interact_ray.get_collider()
+			#if collider and collider.has_node("Interactable"):
+				##var interactable_component = collider.get_node("Interactable") as Interactable
+				#(collider.get_node("Interactable") as Interactable).interact()
 	if Input.is_action_just_pressed("interact"):
 		if check_interaction() == true:
 			var collider = interact_ray.get_collider()
 			if collider and collider.has_node("Interactable"):
-				#var interactable_component = collider.get_node("Interactable") as Interactable
-				(collider.get_node("Interactable") as Interactable).interact()
+				if collider is Item:
+					var was_added = inventory_ui.try_add_item(collider.item_data)
+					if was_added:
+						# Run your original interaction signal chain
+						(collider.get_node("Interactable") as Interactable).interact()
+						# The Item.gd script prints pickup details and runs queue_free() automatically!
+				else:
+					# If it's a door or non-pickup object, just interact without adding to inventory
+					(collider.get_node("Interactable") as Interactable).interact()
+				
+	if Input.is_action_just_pressed("open_close debug menu"):
+		open_close_debug_menu()
+		toggle_3d_collision_shape_visibility()
+		
+			
+	if Input.is_action_just_pressed("open_ui"):
+		if $Head/Camera3D/Inventory.visible == true:
+			$Head/Camera3D/Inventory.hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			$Head/Camera3D/Inventory.show()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 
 func _physics_process(delta):
 	#checks if player fell out of the world
@@ -113,8 +142,7 @@ func _physics_process(delta):
 	check_interaction()
 	# debug menu
 	debug_menu()
-	if Input.is_action_just_pressed("open_close debug menu"):
-		open_close_debug_menu()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		if inside:
@@ -122,15 +150,6 @@ func _physics_process(delta):
 		else:
 			velocity.y -= outside_gravity * delta
 		
-	if Input.is_action_just_pressed("quit"):
-		if $Head/Camera3D/menu.visible == true:
-			$Head/Camera3D/menu.hide()
-			$Head/Camera3D/over.show()
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			$Head/Camera3D/menu.show()
-			$Head/Camera3D/over.hide()
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -198,17 +217,31 @@ func check_interaction():
 	$Head/Camera3D/over/CenterContainer/TextureRect.texture = load("res://assets/textures/crosshair_x.png")
 	return false
 		
-# menu buttons
+func toggle_3d_collision_shape_visibility() -> void:
+	var tree: SceneTree = get_tree()
+	# https://github.com/godotengine/godot-proposals/issues/2072
+	tree.debug_collisions_hint = not tree.debug_collisions_hint
+	print("Set show_debug_collisions_hint: ", tree.debug_collisions_hint)
 
-
-func _on_back_pressed() -> void:
-	$Head/Camera3D/menu.hide()
-	$Head/Camera3D/over.show()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _on_settings_pressed() -> void:
-	pass
-
-func _on_quit_pressed() -> void:
-	get_tree().quit()
-#comment because git is acting gay
+	# Traverse tree to call toggle collision visibility
+	var node_stack: Array[Node] = [tree.get_root()]
+	while not node_stack.is_empty():
+		var node: Node = node_stack.pop_back()
+		if is_instance_valid(node):
+			if node is RayCast3D \
+				or node is CollisionShape3D \
+				or node is CollisionPolygon3D \
+				#or node is CollisionObject3D \
+				or node is GPUParticlesCollision3D \
+				or node is GPUParticlesCollisionBox3D \
+				or node is GPUParticlesCollisionHeightField3D \
+				or node is GPUParticlesCollisionSDF3D \
+				or node is GPUParticlesCollisionSphere3D \
+				or node is CSGPrimitive3D:
+				# remove and re-add the node to the tree to force a redraw
+				# https://github.com/godotengine/godot/blob/26b1fd0d842fa3c2f090ead47e8ea7cd2d6515e1/scene/3d/collision_object_3d.cpp#L39
+				var parent: Node = node.get_parent()
+				if parent:
+					parent.remove_child(node)
+					parent.add_child(node)
+			node_stack.append_array(node.get_children())
