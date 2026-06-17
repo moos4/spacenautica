@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blf4do4vpc8dw" path="res://scripts/Inventory/Inventory.gd" id="1_pilxw"]
 [ext_resource type="PackedScene" uid="uid://8yctwl6vpcnj" path="res://scenes/Inventory/inventory_ui_slot.tscn" id="2_knsip"]
+[ext_resource type="Theme" uid="uid://cw07nwq6u4dem" path="res://data/Themes/Base.tres" id="2_uygoa"]
 
 [node name="Inventory" type="CanvasLayer" unique_id=28303347]
 script = ExtResource("1_pilxw")
@@ -16,6 +17,7 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_uygoa")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=785066203]
 layout_mode = 2

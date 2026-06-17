@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cu11s8ivagis7"]
 
 [ext_resource type="Shader" uid="uid://4ykp1fb8brt1" path="res://assets/shaders/background.gdshader" id="1_4ignj"]
+[ext_resource type="Theme" uid="uid://cw07nwq6u4dem" path="res://data/Themes/Base.tres" id="1_p6dhs"]
 [ext_resource type="Script" uid="uid://dq5ni5yorabt" path="res://scripts/title.gd" id="1_wosw1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wosw1"]
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_p6dhs")
 script = ExtResource("1_wosw1")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1680977198]

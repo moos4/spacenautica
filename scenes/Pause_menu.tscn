@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxay02ag7c4o4"]
 
 [ext_resource type="Script" uid="uid://b1yxpbsclxjwa" path="res://scripts/pause_menu.gd" id="1_cymmp"]
+[ext_resource type="Theme" uid="uid://cw07nwq6u4dem" path="res://data/Themes/Base.tres" id="2_c20xd"]
 
 [sub_resource type="Theme" id="Theme_cymmp"]
 
@@ -18,6 +19,7 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_c20xd")
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel" unique_id=37246707]
 layout_mode = 1

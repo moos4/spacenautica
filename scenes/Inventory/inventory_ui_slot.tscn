@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://8yctwl6vpcnj"]
 
 [ext_resource type="Script" uid="uid://bag5awr3uw5du" path="res://scripts/Inventory/inventory_ui_slot.gd" id="1_eaqu0"]
+[ext_resource type="Theme" uid="uid://cw07nwq6u4dem" path="res://data/Themes/Base.tres" id="1_stek6"]
 
 [node name="Panel" type="Panel" unique_id=1855085620]
 custom_minimum_size = Vector2(128, 128)
 offset_right = 256.0
 offset_bottom = 256.0
+theme = ExtResource("1_stek6")
 script = ExtResource("1_eaqu0")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1428803892]
