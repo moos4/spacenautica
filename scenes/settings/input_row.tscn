@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d0506mva6gjge"]
+
+[ext_resource type="Script" uid="uid://c8xl2anqabqeo" path="res://scripts/settings/input_row.gd" id="1_d3t6r"]
+
+[node name="InputRow" type="HBoxContainer" unique_id=509039439]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_d3t6r")
+
+[node name="ActionLabel" type="Label" parent="." unique_id=732512156]
+layout_mode = 2
+
+[node name="ChangeButton" type="Button" parent="." unique_id=1673209333]
+layout_mode = 2
+
+[connection signal="pressed" from="ChangeButton" to="." method="_on_change_button_pressed"]
